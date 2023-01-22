@@ -1,0 +1,16 @@
+Makefile
+a
+a.out
+aa
+ft_split.c
+ft_split.o
+pipex
+pipex-tester
+pipex.c
+pipex.h
+pipex.o
+process.c
+process.o
+sd
+utils.c
+utils.o

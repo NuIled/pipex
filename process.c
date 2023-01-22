@@ -6,18 +6,31 @@
 /*   By: aoutifra <aoutifra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 09:50:09 by aoutifra          #+#    #+#             */
-/*   Updated: 2023/01/22 08:59:10 by aoutifra         ###   ########.fr       */
+/*   Updated: 2023/01/22 13:21:20 by aoutifra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"pipex.h"
+void	ft_bzero(void *s, size_t n)
+{
+	size_t	i;
+	char	*sr;
+
+	i = 0;
+	sr = (char *)(s);
+	while (n > i)
+	{
+		sr[i] = 0;
+		i++;
+	}
+}
 void ft_freealll(char ** arg)
 {
 
 }
-void firstchiled(char **envp, char **fdd,char **av )
+void firstchiled(char **envp, char **fdd ,char *cmd)
 {
-    // checkcmd (&av);
+	checkcmd (cmd,envp);
 	int	filed = open(*fdd, O_RDONLY);
     dup2(filed,0);
     close(filed);
@@ -30,6 +43,7 @@ void firstchiled(char **envp, char **fdd,char **av )
 }
 void secchiled(char **envp, char **fd,char **av)
 {
+   	checkcmd (av[3],envp);	 
     // checkcmd (&av);int fd=open(av[4],O_TRUNC | O_CREAT | O_RDWR, 0000644);
     int	filed = open(*fd,O_TRUNC | O_CREAT | O_RDWR, 0000644);
     dup2(filed,1);

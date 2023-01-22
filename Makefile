@@ -1,4 +1,4 @@
-SRC = ft_split.c      pipex.c          process.c \
+SRC = ft_split.c      pipex.c     utils.c     process.c \
 
 # Specify the target binary
 TARGET = pipex
@@ -15,11 +15,11 @@ all: $(TARGET)
 
 # Rule to build the target binary
 $(TARGET):  $(OBJECTS)
-	$(CC)   $(CFLAGS)   -o  $(TARGET)   $(OBJECTS)
+	$(CC)   $(CFLAGS) $(OBJECTS) -o $(TARGET)  
 
 # Rule to build the object files
-%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+# %.o: %.c
+# 	$(CC) $(CFLAGS) -c $< -o $@
 
 # Clean rule
 clean:

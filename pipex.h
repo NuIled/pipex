@@ -6,7 +6,7 @@
 /*   By: aoutifra <aoutifra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 21:57:14 by aoutifra          #+#    #+#             */
-/*   Updated: 2023/01/22 08:18:18 by aoutifra         ###   ########.fr       */
+/*   Updated: 2023/01/22 13:21:09 by aoutifra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,14 @@ struct pipex {
     char **args;
     char *cmd;
 }pipex;
+size_t	ft_strlen(const char *s);
 char	**ft_split(char const *s, char c);
-void firstchiled(char **envp, char **fdd,char **av );
+int	ft_strncmp(const char *str1, const char *str2, size_t num);
+int	ft_strchr(char *s, char c);
+size_t	ft_strlcpy(char *dst, const char *src, size_t n);
+char	*ft_strjoin(char *s1, char *s2);
+void firstchiled(char **envp, char **fdd ,char *cmd);
 void secchiled(char **envp, char **fd,char **av);
 void *checkpath(char **envp);
-char *checkcmd(char *cmd);
+void	ft_bzero(void *s, size_t n);
+char *checkcmd(char *cmd, char **envp);
