@@ -6,11 +6,12 @@
 /*   By: aoutifra <aoutifra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 09:50:09 by aoutifra          #+#    #+#             */
-/*   Updated: 2023/01/22 13:21:20 by aoutifra         ###   ########.fr       */
+/*   Updated: 2023/02/06 13:32:39 by aoutifra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"pipex.h"
+
 void	ft_bzero(void *s, size_t n)
 {
 	size_t	i;
@@ -24,34 +25,46 @@ void	ft_bzero(void *s, size_t n)
 		i++;
 	}
 }
-void ft_freealll(char ** arg)
-{
 
-}
-void firstchiled(char **envp, char **fdd ,char *cmd)
+void	firstchiled(char **envp, char *filename, char *cmd)
 {
-	checkcmd (cmd,envp);
-	int	filed = open(*fdd, O_RDONLY);
-    dup2(filed,0);
-    close(filed);
-    if (execve(pipex.cmd, pipex.args, envp)==-1)
-        {
-            perror(ERR_CMD);
-			exit(1);
-        }
-	execve(pipex.cmd, pipex.args, envp);
+	int		fd;
+	char	**command;
+
+	fd = open(filename, O_RDONLY);
+	if (fd == -1)
+	{
+		perror(ERR_INFILE);
+		exit(EXIT_FAILURE);
+	}
+	dup2(fd, 0);
+	close(fd);
+	command = checkcmd (cmd, envp);
+	if (execve(*command, command, envp) == -1)
+	{
+		perror(ERR_CMD);
+		exit(1);
+	}
 }
-void secchiled(char **envp, char **fd,char **av)
+
+void	parentprocess(char **envp, char *filename, char *cmd)
 {
-   	checkcmd (av[3],envp);	 
-    // checkcmd (&av);int fd=open(av[4],O_TRUNC | O_CREAT | O_RDWR, 0000644);
-    int	filed = open(*fd,O_TRUNC | O_CREAT | O_RDWR, 0000644);
-    dup2(filed,1);
-    close(filed);
-	if (execve(pipex.cmd, pipex.args, envp) == -1)
-        {
-            perror(ERR_CMD);
-			exit(1);
-        }
-	execve(pipex.cmd, pipex.args, envp);
+	int		fd;
+	char	**command;
+
+	fd = open(filename, O_CREAT | O_TRUNC | O_RDWR, 0777);
+	if (fd == -1)
+	{
+		perror(ERR_OUTFILE);
+		exit(EXIT_FAILURE);
+	}
+	dup2(fd, 1);
+	close(fd);
+	command = checkcmd (cmd, envp);
+	
+	if (execve(*command, command, envp) == -1)
+	{
+		perror(ERR_CMD);
+		exit(1);
+	}
 }

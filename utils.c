@@ -6,7 +6,7 @@
 /*   By: aoutifra <aoutifra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 09:25:42 by aoutifra          #+#    #+#             */
-/*   Updated: 2023/01/22 09:50:07 by aoutifra         ###   ########.fr       */
+/*   Updated: 2023/02/06 11:12:00 by aoutifra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ char	*ft_strjoin(char *s1, char *s2)
 		while (s2[++j])
 			res[i + j] = s2[j];
 		res[i + j] = '\0';
-		free(s1);
 		return (res);
 	}
 	return (NULL);
